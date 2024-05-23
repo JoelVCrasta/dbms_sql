@@ -1,22 +1,41 @@
 import express from "express"
+import session from "express-session"
 import cors from "cors"
 import dotenv from "dotenv"
-dotenv.config()
+import cookieParser from "cookie-parser"
+
+import sequelize from "./Models/postgres"
+import router from "./Routes/AuthRoutes"
 
 const app = express()
-app.use(express.json(), cors())
+dotenv.config()
+app.use(express.json())
+app.use(cookieParser())
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+)
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "secret",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: true,
+      sameSite: "none",
+    },
+  })
+)
 
-app.post("/api/login", (req, res) => {
-  const { email, password } = req.body
+// Connect to the database
+sequelize
+  .authenticate()
+  .then(() => console.log("Connection has been established successfully."))
+  .catch((error) => console.error("Unable to connect to the database:", error))
 
-  console.log(email, password)
-
-  if (req.body) {
-    res.status(200).json({ success: true, message: "Login successful" })
-  } else {
-    res.status(400).json({ success: false, message: "Login failed" })
-  }
-})
+app.use("/api", router)
 
 const PORT = process.env.PORT
 app.listen(PORT, () => {

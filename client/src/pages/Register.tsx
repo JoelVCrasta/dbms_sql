@@ -27,16 +27,16 @@ const Register: React.FC = () => {
         body: JSON.stringify(registerDetails),
       })
 
-      if (!response.ok || response.status === 500) {
-        throw new Error(`ERROR: ${response.status}`)
+      if (!response.ok && response.status === 500) {
+        throw new Error(`${response.status}`)
       }
 
       const data = await response.json()
 
-      if (!data.success || response.status === 409) {
+      if (!data.success && response.status === 409) {
         setResMessage(data.message)
       } else {
-        navigate("/")
+        setResMessage(data.message)
       }
     } catch (error) {
       console.error("Something went wrong : ", error)
@@ -54,6 +54,7 @@ const Register: React.FC = () => {
       <h1 className="mb-4 text-2xl font-bold">Register</h1>
       <section className="p-4 border-2 border-black rounded-xl">
         <form onSubmit={handleRegister} className="flex flex-col gap-y-4">
+          <p className="text-red-500">{resMessage}</p>
           <input
             type="text"
             placeholder="Username"

@@ -3,6 +3,7 @@ import session from "express-session"
 import { Request, Response } from "express"
 
 import { userLogin, userRegister } from "../Controllers/AuthController"
+import { sendEmail } from "../Utils/emailVerify"
 import { cookie } from "../Utils/cookie"
 
 const router = express.Router()
@@ -50,12 +51,20 @@ router.post(
     const user = await userRegister(username, email, password)
 
     try {
-      if (user) {
-        cookie(res)
+      if (user === 0) {
+        await sendEmail(email)
 
-        res.status(201).json({ success: true, message: "Register successful" })
+        res
+          .status(201)
+          .json({ success: true, message: "Check email for verification" })
+      } else if (user === 1) {
+        res
+          .status(409)
+          .json({ success: false, message: "Email already exists" })
       } else {
-        res.status(409).json({ success: false, message: "User already exists" })
+        res
+          .status(409)
+          .json({ success: false, message: "Username already exists" })
       }
     } catch (error) {
       console.error("Something went wrong: ", error)

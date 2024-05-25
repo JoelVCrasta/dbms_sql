@@ -6,6 +6,8 @@ import cookieParser from "cookie-parser"
 
 import sequelize from "./Models/postgres"
 import router from "./Routes/AuthRoutes"
+import Users from "./Models/User"
+import { cookie } from "./Utils/cookie"
 
 const app = express()
 dotenv.config()
@@ -36,6 +38,18 @@ sequelize
   .catch((error) => console.error("Unable to connect to the database:", error))
 
 app.use("/api", router)
+
+app.get("/verify", async (req, res) => {
+  const { email } = req.query
+
+  const user = await Users.findOne({ where: { email } })
+
+  if (user) {
+    await Users.update({ confirmed: true }, { where: { email } })
+    cookie(res)
+    res.redirect("http://localhost:5173/")
+  }
+})
 
 const PORT = process.env.PORT
 app.listen(PORT, () => {

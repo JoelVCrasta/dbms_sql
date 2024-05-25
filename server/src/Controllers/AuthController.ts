@@ -13,8 +13,6 @@ export const userLogin = async (email: string, password: string) => {
     checkUser?.dataValues.password || ""
   )
 
-  console.log(isPasswordValid)
-
   return isPasswordValid ? checkUser : null
 }
 
@@ -23,10 +21,16 @@ export const userRegister = async (
   email: string,
   password: string
 ) => {
-  const isExistingUser = await User.findOne({ where: { email } })
-  if (isExistingUser) {
-    return null
+  const isExistingUserByEmail = await User.findOne({ where: { email } })
+  const isExistingUserByUsername = await User.findOne({ where: { username } })
+
+  if (isExistingUserByEmail && isExistingUserByEmail?.dataValues.confirmed === true) {
+    return 1
   }
+  else if (isExistingUserByUsername) {
+    return 2
+  }
+
   const salt = await bcrypt.genSalt(10)
   const hashedPswd = await bcrypt.hash(password, salt)
 
@@ -36,5 +40,5 @@ export const userRegister = async (
     password: hashedPswd,
   })
 
-  return newUser
+  return 0
 }

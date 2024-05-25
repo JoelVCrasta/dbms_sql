@@ -14,6 +14,11 @@ const users = sequelize.define("users", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  confirmed: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
+  },
   createdAt: {
     type: DataTypes.DATE,
     allowNull: false,

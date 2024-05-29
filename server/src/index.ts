@@ -19,17 +19,6 @@ app.use(
     credentials: true,
   })
 )
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET || "secret",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      secure: true,
-      sameSite: "none",
-    },
-  })
-)
 
 // Connect to the database
 sequelize

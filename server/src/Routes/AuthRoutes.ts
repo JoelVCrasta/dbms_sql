@@ -1,5 +1,4 @@
 import express from "express"
-import session from "express-session"
 import { Request, Response } from "express"
 
 import { userLogin, userRegister } from "../Controllers/AuthController"

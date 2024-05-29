@@ -8,7 +8,6 @@ export const cookie = (res: express.Response) => {
     secure: true,
     sameSite: "none",
     path: "/",
-    // maxAge: cookieAge,
-    expires: new Date(Date.now() + cookieAge),
+    maxAge: cookieAge,
   })
 }

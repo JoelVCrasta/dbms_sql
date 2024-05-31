@@ -1,7 +1,12 @@
 import express from "express"
 import { Request, Response } from "express"
 
-import { userLogin, userRegister } from "../Controllers/AuthController"
+import {
+  userLogin,
+  userRegister,
+  getDeptDetails,
+  getEmpDetails,
+} from "../Controllers/AuthController"
 import { sendEmail } from "../Utils/emailVerify"
 import { cookie } from "../Utils/cookie"
 
@@ -71,5 +76,27 @@ router.post(
     }
   }
 )
+
+router.get("/dept", async (req: Request, res: Response) => {
+  const deptDetails = await getDeptDetails()
+
+  try {
+    res.status(200).json({ success: true, deptDetails })
+  } catch (error) {
+    console.error("Something went wrong: ", error)
+    res.status(500).json({ success: false, message: "Server error" })
+  }
+})
+
+router.get("/emp", async (req: Request, res: Response) => {
+  const empDetails = await getEmpDetails()
+
+  try {
+    res.status(200).json({ success: true, empDetails })
+  } catch (error) {
+    console.error("Something went wrong: ", error)
+    res.status(500).json({ success: false, message: "Server error" })
+  }
+})
 
 export default router

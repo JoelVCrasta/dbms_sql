@@ -50,8 +50,8 @@ const Login: React.FC = () => {
 
   return (
     <section className="w-full h-screen flex flex-col justify-center items-center">
-      <h1 className="mb-4 text-2xl font-bold">Login</h1>
-      <section className="p-4 border-2 border-black rounded-xl ">
+      <h1 className="mb-4 text-3xl text-white font-bold">Login</h1>
+      <section className=" w-72 p-4 border-2 border-white rounded-xl ">
         <form onSubmit={handleLogin} className="flex flex-col gap-y-4">
           <p className="">{resMessage}</p>
           <input
@@ -61,7 +61,7 @@ const Login: React.FC = () => {
             onChange={(e) =>
               setLoginDetails({ ...loginDetails, email: e.target.value })
             }
-            className="border-2 border-black p-2"
+            className="border-2 p-2"
           />
 
           <input
@@ -71,20 +71,22 @@ const Login: React.FC = () => {
             onChange={(e) => {
               setLoginDetails({ ...loginDetails, password: e.target.value })
             }}
-            className="border-2 border-black p-2"
+            className="border-2 p-2"
           />
 
           <button type="submit" className="text-white bg-black p-2">
             Login
           </button>
         </form>
-        <button
-          type="submit"
-          onClick={() => navigate("/")}
-          className="mt-2 w-full text-black bg-white hover:text-gray-700"
-        >
-          Go to Home
-        </button>
+        <div className="mt-2 flex justify-center">
+          <button
+            type="submit"
+            onClick={() => navigate("/")}
+            className=" text-white hover:text-gray-300"
+          >
+            Go to Home
+          </button>
+        </div>
       </section>
     </section>
   )

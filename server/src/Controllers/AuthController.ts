@@ -1,5 +1,7 @@
 import bcrypt from "bcryptjs"
 import User from "../Models/User"
+import Dept from "../Models/Dept"
+import Employee from "../Models/Employee"
 
 export const userLogin = async (email: string, password: string) => {
   const checkUser = await User.findOne({ where: { email } })
@@ -24,10 +26,12 @@ export const userRegister = async (
   const isExistingUserByEmail = await User.findOne({ where: { email } })
   const isExistingUserByUsername = await User.findOne({ where: { username } })
 
-  if (isExistingUserByEmail && isExistingUserByEmail?.dataValues.confirmed === true) {
+  if (
+    isExistingUserByEmail &&
+    isExistingUserByEmail?.dataValues.confirmed === true
+  ) {
     return 1
-  }
-  else if (isExistingUserByUsername) {
+  } else if (isExistingUserByUsername) {
     return 2
   }
 
@@ -41,4 +45,16 @@ export const userRegister = async (
   })
 
   return 0
+}
+
+export const getDeptDetails = async () => {
+  const deptDetails = await Dept.findAll()
+
+  return deptDetails
+}
+
+export const getEmpDetails = async () => {
+  const empDetails = await Employee.findAll()
+
+  return empDetails
 }

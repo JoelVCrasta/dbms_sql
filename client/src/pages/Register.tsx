@@ -51,8 +51,8 @@ const Register: React.FC = () => {
 
   return (
     <section className="w-full h-screen flex flex-col justify-center items-center">
-      <h1 className="mb-4 text-2xl font-bold">Register</h1>
-      <section className="p-4 border-2 border-black rounded-xl">
+      <h1 className="mb-4 text-3xl text-white font-bold">Register</h1>
+      <section className="p-4 w-72 border-2 border-white rounded-xl">
         <form onSubmit={handleRegister} className="flex flex-col gap-y-4">
           <p className="text-red-500">{resMessage}</p>
           <input
@@ -65,7 +65,7 @@ const Register: React.FC = () => {
                 username: e.target.value,
               })
             }
-            className="border-2 border-black p-2"
+            className="border-2 p-2"
           />
 
           <input
@@ -75,7 +75,7 @@ const Register: React.FC = () => {
             onChange={(e) =>
               setRegisterDetails({ ...registerDetails, email: e.target.value })
             }
-            className="border-2 border-black p-2"
+            className="border-2 p-2"
           />
 
           <input
@@ -88,20 +88,22 @@ const Register: React.FC = () => {
                 password: e.target.value,
               })
             }
-            className="border-2 border-black p-2"
+            className="border-2 p-2"
           />
 
           <button type="submit" className="text-white bg-black p-2">
             Register
           </button>
         </form>
-        <button
-          type="submit"
-          onClick={() => navigate("/")}
-          className="mt-2 w-full text-black bg-white hover:text-gray-700"
-        >
-          Go to Home
-        </button>
+        <div className="mt-2 flex justify-center">
+          <button
+            type="submit"
+            onClick={() => navigate("/")}
+            className=" text-white hover:text-gray-300"
+          >
+            Go to Home
+          </button>
+        </div>
       </section>
     </section>
   )

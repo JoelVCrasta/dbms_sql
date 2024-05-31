@@ -8,6 +8,7 @@
   box-sizing: border-box;
 }
 
-/* html {
-  font-size: 2rem;
-} */
+html,
+body {
+  background: #2f2d2e;
+}

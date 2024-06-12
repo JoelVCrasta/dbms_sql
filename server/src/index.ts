@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser"
 
 import sequelize from "./Models/postgres"
 import router from "./Routes/AuthRoutes"
+import oprouter from "./Routes/OpRoutes"
 import Users from "./Models/User"
 import { cookie } from "./Utils/cookie"
 
@@ -27,6 +28,7 @@ sequelize
   .catch((error) => console.error("Unable to connect to the database:", error))
 
 app.use("/api", router)
+app.use("/api", oprouter)
 
 app.get("/verify", async (req, res) => {
   const { email } = req.query

@@ -47,7 +47,7 @@ const AddDept: React.FC<UpdateDeptProps> = ({ onUpdateSuccess }) => {
   }
 
   return (
-    <section className="border-2 rounded-xl flex flex-col p-2">
+    <section className="border-2 rounded-lg flex flex-col p-2">
       <h1 className="text-white text-xl font-semibold text-center">
         Update Department
       </h1>

@@ -6,7 +6,7 @@ import cookieParser from "cookie-parser"
 
 import sequelize from "./Models/postgres"
 import router from "./Routes/AuthRoutes"
-import oprouter from "./Routes/OpRoutes"
+import oprouter from "./Routes/DeptRoutes"
 import Users from "./Models/User"
 import { cookie } from "./Utils/cookie"
 

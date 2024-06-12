@@ -55,7 +55,7 @@ const DeptTable = () => {
         {showUpdateDept && <UpdateDept onUpdateSuccess={getDeptDetails} />}
       </div>
       <section className="p-2 h-full ">
-        <section className="border-2 rounded-xl h-full scroll-y-auto">
+        <section className="border-2 rounded-lg h-full scroll-y-auto">
           <table className="w-full text-white">
             <thead>
               <tr>
@@ -103,7 +103,10 @@ const DeptTable = () => {
 
         <div className="flex justify-between">
           <button
-            onClick={() => setShowAddDept((prev) => !prev)}
+            onClick={() => {
+              if (showUpdateDept) setShowUpdateDept((prev) => !prev)
+              setShowAddDept((prev) => !prev)
+            }}
             className="bg-white text-black font-semibold w-32 h-8 rounded-lg mt-4"
           >
             Add
@@ -117,7 +120,10 @@ const DeptTable = () => {
           </button>
 
           <button
-            onClick={() => setShowUpdateDept((prev) => !prev)}
+            onClick={() => {
+              if (showAddDept) setShowAddDept((prev) => !prev)
+              setShowUpdateDept((prev) => !prev)
+            }}
             className="bg-white text-black font-semibold  w-32 h-8 rounded-lg mt-4"
           >
             Update

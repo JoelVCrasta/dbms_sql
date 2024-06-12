@@ -23,6 +23,8 @@ const employees = sequelize.define(
         model: "dept",
         key: "id",
       },
+      onDelete: "CASCADE",
+      onUpdate: "CASCADE",
     },
   },
   {

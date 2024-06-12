@@ -68,14 +68,13 @@ oprouter.post("/deptupdate", async (req: Request, res: Response) => {
 })
 
 oprouter.delete("/deptdelete", async (req: Request, res: Response) => {
-  const { deptId } = req.body
+  const deptIds = req.body.deptIds
+  console.log(deptIds)
 
   try {
-    for (let id in deptId) {
-      await Dept.destroy({ where: { id: id } })
-    }
+    await Dept.destroy({ where: { id: deptIds } })
 
-    res.status(200).json({ success: true, message: "Department deleted" })
+    res.status(200).json({ success: true, message: "Departments deleted" })
   } catch (error) {
     console.error("Something went wrong: ", error)
     res.status(500).json({ success: false, message: "Server error" })

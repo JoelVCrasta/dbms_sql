@@ -3,10 +3,20 @@ import { useEffect, useState } from "react"
 import AddEmp from "./EmpButtons/AddEmp"
 import UpdateEmp from "./EmpButtons/UpdateEmp"
 
+interface empProps {
+  id: number
+  name: string
+  salary: number
+  dept: number
+}
+
 const EmpTable = () => {
   const [showAddEmp, setShowAddEmp] = useState<boolean>(false)
   const [showUpdateEmp, setShowUpdateEmp] = useState<boolean>(false)
+  const [selectedEmp, setSelectedEmp] = useState<number[] | null>(null)
   const [empData, setEmpData] = useState<[]>([])
+
+  console.log(selectedEmp)
 
   async function getEmpDetails() {
     try {
@@ -33,9 +43,20 @@ const EmpTable = () => {
     getEmpDetails()
   }, [])
 
+  // function to select the employee records
+  function selectId(id: number) {
+    setSelectedEmp((prev) => {
+      if (prev?.includes(id)) {
+        return prev?.filter((empId) => empId !== id)
+      } else {
+        return [...(prev || []), id]
+      }
+    })
+  }
+
   return (
     <>
-      <div className="absolute top-80 left-72">
+      <div className="absolute top-72 left-72">
         {showAddEmp && <AddEmp onAddSuccess={getEmpDetails} />}
         {showUpdateEmp && <UpdateEmp onUpdateSuccess={getEmpDetails} />}
       </div>
@@ -53,14 +74,30 @@ const EmpTable = () => {
             </thead>
 
             <tbody>
-              {empData.map((emp: any, index) => (
-                <tr key={index}>
-                  <td className="text-center">{emp.id}</td>
-                  <td className="text-center">{emp.name}</td>
-                  <td className="text-center">{emp.salary}</td>
-                  <td className="text-center">{emp.dept}</td>
+              {empData.length === 0 ? ( // check if the employee data is empty
+                <tr>
+                  <td className="text-center">No Records found</td>
                 </tr>
-              ))}
+              ) : (
+                empData.map((emp: empProps, index) => {
+                  const isSelected = selectedEmp?.includes(emp.id)
+
+                  return (
+                    <tr
+                      key={index}
+                      onClick={() => selectId(emp.id)} // function call onClick to select records
+                      className={`text-lg border-y-2 cursor-pointer ${
+                        isSelected ? "bg-gray-500" : ""
+                      }`}
+                    >
+                      <td className="text-center">{emp.id}</td>
+                      <td className="text-center">{emp.name}</td>
+                      <td className="text-center">{emp.salary}</td>
+                      <td className="text-center">{emp.dept}</td>
+                    </tr>
+                  )
+                })
+              )}
             </tbody>
           </table>
         </section>

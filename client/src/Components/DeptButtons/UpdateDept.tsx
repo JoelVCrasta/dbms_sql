@@ -10,7 +10,7 @@ const UpdateDept = ({ onUpdateSuccess }: DeptProps) => {
 
   async function updateDepartment() {
     const response = await fetch("http://localhost:3000/api/deptupdate", {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },

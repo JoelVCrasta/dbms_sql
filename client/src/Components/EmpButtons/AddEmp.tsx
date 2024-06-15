@@ -12,13 +12,13 @@ const AddEmp = ({ onAddSuccess }: DeptProps) => {
 
   // async function to add an employee in the database
   async function addDepartment() {
-    const response = await fetch("http://localhost:3000/api/deptadd", {
+    const response = await fetch("http://localhost:3000/api/empadd", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        deptId: parseInt(empId),
+        empId: parseInt(empId),
         empName,
         empSalary,
         empDept: parseInt(empDept),
@@ -34,9 +34,9 @@ const AddEmp = ({ onAddSuccess }: DeptProps) => {
     if (data.success) {
       alert(data.message)
       onAddSuccess() // function to get the updated department details
-    } else {
+    } else if (!data.success && response.status === 404) {
       alert(data.message)
-    }
+    } else alert(data.message)
   }
 
   // function to check if any field is empty
@@ -64,7 +64,7 @@ const AddEmp = ({ onAddSuccess }: DeptProps) => {
 
   return (
     <section className="border-2 rounded-lg flex flex-col p-2">
-      <h1 className="text-white text-xl font-semibold text-center">
+      <h1 className="text-white text-xl font-semibold text-center mb-4">
         Add Employee
       </h1>
 
@@ -86,7 +86,7 @@ const AddEmp = ({ onAddSuccess }: DeptProps) => {
 
       <p className="text-white">Salary</p>
       <input
-        type="text"
+        type="number"
         value={empSalary}
         onChange={(e) => setEmpSalary(e.target.value)}
         className="rounded-lg px-2 mb-4"

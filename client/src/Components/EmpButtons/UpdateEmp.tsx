@@ -10,9 +10,10 @@ const UpdateEmp = ({ onUpdateSuccess }: DeptProps) => {
   const [empSalary, setEmpSalary] = useState<string>("")
   const [empDept, setEmpDept] = useState<string>("")
 
+  // function to update the department
   async function updateDepartment() {
-    const response = await fetch("http://localhost:3000/api/deptupdate", {
-      method: "POST",
+    const response = await fetch("http://localhost:3000/api/empupdate", {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
@@ -36,8 +37,6 @@ const UpdateEmp = ({ onUpdateSuccess }: DeptProps) => {
     } else {
       alert(data.message)
     }
-
-    resetFields()
   }
 
   // function to check if any field is empty
@@ -52,6 +51,7 @@ const UpdateEmp = ({ onUpdateSuccess }: DeptProps) => {
   function handleUpdateDept() {
     checkEmpty()
     updateDepartment()
+    resetFields()
   }
 
   // function to reset the fields
@@ -64,7 +64,7 @@ const UpdateEmp = ({ onUpdateSuccess }: DeptProps) => {
 
   return (
     <section className="border-2 rounded-lg flex flex-col p-2">
-      <h1 className="text-white text-xl font-semibold text-center">
+      <h1 className="text-white text-xl font-semibold text-center mb-4">
         Update Department
       </h1>
 
@@ -76,28 +76,28 @@ const UpdateEmp = ({ onUpdateSuccess }: DeptProps) => {
         className="rounded-lg px-2 mb-4"
       />
 
-      <p className="text-white">Department Name</p>
+      <p className="text-white">Employee Name</p>
       <input
         type="text"
         value={empName}
         onChange={(e) => setEmpName(e.target.value)}
-        className="rounded-lg px-2"
+        className="rounded-lg px-2 mb-4"
       />
 
       <p className="text-white">Salary</p>
       <input
-        type="text"
+        type="number"
         value={empSalary}
         onChange={(e) => setEmpSalary(e.target.value)}
-        className="rounded-lg px-2"
+        className="rounded-lg px-2 mb-4"
       />
 
       <p className="text-white">Department ID</p>
       <input
-        type="text"
+        type="number"
         value={empDept}
         onChange={(e) => setEmpDept(e.target.value)}
-        className="rounded-lg px-2"
+        className="rounded-lg px-2 mb-4"
       />
 
       {/* handles update when button is clicked */}

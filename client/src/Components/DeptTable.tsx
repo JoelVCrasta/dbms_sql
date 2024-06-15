@@ -54,6 +54,17 @@ const DeptTable = () => {
     getDeptDetails()
   }, [])
 
+  // function to select the department records
+  function selectId(id: number) {
+    setSelectedDept((prev) => {
+      if (prev?.includes(id)) {
+        return prev?.filter((empId) => empId !== id)
+      } else {
+        return [...(prev || []), id]
+      }
+    })
+  }
+
   return (
     <>
       <div className="absolute top-96 left-72">
@@ -71,9 +82,9 @@ const DeptTable = () => {
             </thead>
 
             <tbody>
-              {deptData.length === 0 ? (
+              {deptData.length === 0 ? ( // check if the department data is empty
                 <tr>
-                  <td>No Records found</td>
+                  <td className="text-center">No Records found</td>
                 </tr>
               ) : (
                 deptData.map(
@@ -83,16 +94,8 @@ const DeptTable = () => {
                     return (
                       <tr
                         key={index}
-                        onClick={() => {
-                          setSelectedDept((prev) => {
-                            if (prev?.includes(dept.id)) {
-                              return prev?.filter((id) => id !== dept.id)
-                            } else {
-                              return [...(prev || []), dept.id]
-                            }
-                          })
-                        }}
-                        className={`text-lg border-y-2 ${
+                        onClick={() => selectId(dept.id)} // function call onClick to select records
+                        className={`text-lg border-y-2 cursor-pointer ${
                           isSelected ? "bg-gray-500" : ""
                         }`}
                       >

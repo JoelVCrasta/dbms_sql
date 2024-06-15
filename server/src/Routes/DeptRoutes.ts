@@ -36,7 +36,7 @@ oprouter.post("/deptadd", async (req: Request, res: Response) => {
   }
 })
 
-oprouter.post("/deptupdate", async (req: Request, res: Response) => {
+oprouter.put("/deptupdate", async (req: Request, res: Response) => {
   const { deptId, deptName } = req.body
 
   const existingId = await Dept.findOne({ where: { id: deptId } })

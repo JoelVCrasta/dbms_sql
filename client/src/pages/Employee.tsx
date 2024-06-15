@@ -1,24 +1,13 @@
-import { useState, useEffect, useMemo } from "react"
+import EmpTable from "../Components/EmpTable"
 
 const Employee = () => {
-  useEffect(() => {
-    async function getEmpDetails() {
-      const response = await fetch("http://localhost:3000/api/emp", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-
-      const data = await response.json()
-
-      console.log(data)
-    }
-    
-    getEmpDetails()
-  }, [])
-
-  return <div>Employee</div>
+  return (
+    <section className="h-screen flex justify-center items-center">
+      <section className="h-2/4 w-2/5">
+        <EmpTable />
+      </section>
+    </section>
+  )
 }
 
 export default Employee

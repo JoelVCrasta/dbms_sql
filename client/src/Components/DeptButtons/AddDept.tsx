@@ -1,10 +1,10 @@
 import { useState } from "react"
 
-type AddDeptProps = {
+type DeptProps = {
   onAddSuccess: () => void
 }
 
-const AddDept: React.FC<AddDeptProps> = ({ onAddSuccess }) => {
+const AddDept = ({ onAddSuccess }: DeptProps) => {
   const [deptId, setdeptId] = useState<string>("")
   const [deptName, setDeptName] = useState<string>("")
 
@@ -30,10 +30,10 @@ const AddDept: React.FC<AddDeptProps> = ({ onAddSuccess }) => {
       alert(data.message)
     }
 
-    setdeptId("")
-    setDeptName("")
+    resetFields()
   }
 
+  // function to check if any field is empty
   function checkEmpty() {
     if (deptId === "" || deptName === "") {
       alert("Please fill all the fields")
@@ -41,9 +41,16 @@ const AddDept: React.FC<AddDeptProps> = ({ onAddSuccess }) => {
     }
   }
 
+  // function to handle the add department button
   function handleAddDept() {
     checkEmpty()
     addDepartment()
+  }
+
+  // function to reset the fields
+  function resetFields() {
+    setdeptId("")
+    setDeptName("")
   }
 
   return (
@@ -51,14 +58,16 @@ const AddDept: React.FC<AddDeptProps> = ({ onAddSuccess }) => {
       <h1 className="text-white text-xl font-semibold text-center">
         Add Department
       </h1>
-      <p className="text-white">Enter ID</p>
+
+      <p className="text-white">ID</p>
       <input
         type="number"
         value={deptId}
         onChange={(e) => setdeptId(e.target.value)}
         className="rounded-lg px-2 mb-4"
       />
-      <p className="text-white">Enter Department Name</p>
+
+      <p className="text-white">Department Name</p>
       <input
         type="text"
         value={deptName}
@@ -66,6 +75,7 @@ const AddDept: React.FC<AddDeptProps> = ({ onAddSuccess }) => {
         className="rounded-lg px-2"
       />
 
+      {/* Button to add department on click */}
       <button
         onClick={() => {
           handleAddDept()

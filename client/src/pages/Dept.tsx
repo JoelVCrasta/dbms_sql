@@ -1,4 +1,3 @@
-
 import DeptTable from "../Components/DeptTable"
 
 const Dept = () => {

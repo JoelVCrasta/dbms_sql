@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize"
 import sequelize from "./postgres"
 
-const dept = sequelize.define(
+const Dept = sequelize.define(
   "depts",
   {
     id: {
@@ -18,4 +18,4 @@ const dept = sequelize.define(
   }
 )
 
-export default dept
+export default Dept

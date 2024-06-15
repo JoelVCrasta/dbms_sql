@@ -1,8 +1,8 @@
-import { DataType, DataTypes, INTEGER } from "sequelize"
+import { DataTypes } from "sequelize"
 import sequelize from "./postgres"
 
-const employees = sequelize.define(
-  "employee",
+const Employee = sequelize.define(
+  "employees",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -32,4 +32,4 @@ const employees = sequelize.define(
   }
 )
 
-export default employees
+export default Employee

@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser"
 import sequelize from "./Models/postgres"
 import router from "./Routes/AuthRoutes"
 import oprouter from "./Routes/DeptRoutes"
+import emprouter from "./Routes/EmpRoutes"
 import Users from "./Models/User"
 import { cookie } from "./Utils/cookie"
 
@@ -29,7 +30,9 @@ sequelize
 
 app.use("/api", router)
 app.use("/api", oprouter)
+app.use("/api", emprouter)
 
+// verify email
 app.get("/verify", async (req, res) => {
   const { email } = req.query
 
@@ -42,6 +45,7 @@ app.get("/verify", async (req, res) => {
   }
 })
 
+// run server on port 3000
 const PORT = process.env.PORT
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`)

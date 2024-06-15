@@ -1,10 +1,10 @@
 import { useState } from "react"
 
-type UpdateDeptProps = {
+type DeptProps = {
   onUpdateSuccess: () => void
 }
 
-const AddDept: React.FC<UpdateDeptProps> = ({ onUpdateSuccess }) => {
+const UpdateDept = ({ onUpdateSuccess }: DeptProps) => {
   const [deptId, setdeptId] = useState<string>("")
   const [deptName, setDeptName] = useState<string>("")
 
@@ -78,4 +78,4 @@ const AddDept: React.FC<UpdateDeptProps> = ({ onUpdateSuccess }) => {
   )
 }
 
-export default AddDept
+export default UpdateDept

@@ -1,16 +1,21 @@
 import { useEffect, useState } from "react"
-import AddDept from "./AddDept"
-import UpdateDept from "./UpdateDept"
-import DeleteDept from "./DeleteDept"
+import AddDept from "./DeptButtons/AddDept"
+import UpdateDept from "./DeptButtons/UpdateDept"
+import DeleteDept from "./DeptButtons/DeleteDept"
+
+// interface for the department details
+interface DeptTableProps {
+  id: number
+  dept_name: string
+}
 
 const DeptTable = () => {
   const [showAddDept, setShowAddDept] = useState<boolean>(false)
   const [showUpdateDept, setShowUpdateDept] = useState<boolean>(false)
   const [selectedDept, setSelectedDept] = useState<number[] | null>(null)
-  const [deptData, setDeptData] = useState<[]>([])
+  const [deptData, setDeptData] = useState<DeptTableProps[]>([])
 
-  console.log(selectedDept)
-
+  // function to get the department details
   async function getDeptDetails() {
     try {
       const response = await fetch("http://localhost:3000/api/dept", {
@@ -31,6 +36,7 @@ const DeptTable = () => {
     }
   }
 
+  // function to delete a department
   async function deleteDepartment() {
     if (!selectedDept) {
       alert("Please select a department to delete")
@@ -38,12 +44,12 @@ const DeptTable = () => {
     }
 
     const response = await DeleteDept(selectedDept)
-    console.log(response)
-    alert(response.message)
+    alert(response.message) // alert the response message
 
     getDeptDetails()
   }
 
+  // useEffect to get the department details
   useEffect(() => {
     getDeptDetails()
   }, [])

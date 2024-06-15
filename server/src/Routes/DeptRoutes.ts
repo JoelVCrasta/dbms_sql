@@ -1,7 +1,7 @@
 import { Router, Request, Response } from "express"
 
 import Dept from "../Models/Dept"
-import Employee from "../Models/Employee"
+
 
 const oprouter = Router()
 
@@ -10,17 +10,6 @@ oprouter.get("/dept", async (req: Request, res: Response) => {
 
   try {
     res.status(200).json({ success: true, deptDetails })
-  } catch (error) {
-    console.error("Something went wrong: ", error)
-    res.status(500).json({ success: false, message: "Server error" })
-  }
-})
-
-oprouter.get("/emp", async (req: Request, res: Response) => {
-  const empDetails = await Employee.findAll()
-
-  try {
-    res.status(200).json({ success: true, empDetails })
   } catch (error) {
     console.error("Something went wrong: ", error)
     res.status(500).json({ success: false, message: "Server error" })

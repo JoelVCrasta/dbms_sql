@@ -86,14 +86,14 @@ const EmpTable = () => {
                     <tr
                       key={index}
                       onClick={() => selectId(emp.id)} // function call onClick to select records
-                      className={`text-lg border-y-2 cursor-pointer ${
+                      className={`text-lg border-y-2 text-center cursor-pointer ${
                         isSelected ? "bg-gray-500" : ""
                       }`}
                     >
-                      <td className="text-center">{emp.id}</td>
-                      <td className="text-center">{emp.name}</td>
-                      <td className="text-center">{emp.salary}</td>
-                      <td className="text-center">{emp.dept}</td>
+                      <td>{emp.id}</td>
+                      <td>{emp.name}</td>
+                      <td>{emp.salary}</td>
+                      <td>{emp.dept}</td>
                     </tr>
                   )
                 })

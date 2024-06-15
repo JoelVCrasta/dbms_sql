@@ -95,12 +95,12 @@ const DeptTable = () => {
                       <tr
                         key={index}
                         onClick={() => selectId(dept.id)} // function call onClick to select records
-                        className={`text-lg border-y-2 cursor-pointer ${
+                        className={`text-lg border-y-2 text-center cursor-pointer ${
                           isSelected ? "bg-gray-500" : ""
                         }`}
                       >
-                        <td className="text-center">{dept.id}</td>
-                        <td className="text-center">{dept.dept_name}</td>
+                        <td>{dept.id}</td>
+                        <td>{dept.dept_name}</td>
                       </tr>
                     )
                   }

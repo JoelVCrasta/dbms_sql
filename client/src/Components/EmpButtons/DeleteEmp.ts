@@ -1,19 +1,19 @@
-export default async function DeleteDept(selectedIds: number[]) {
+export default async function DeleteEmp(empids: number[]) {
   try {
-    const response = await fetch("http://localhost:3000/api/deptdelete", {
+    const response = await fetch("http://localhost:3000/api/empdelete", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ deptIds: selectedIds }),
+      body: JSON.stringify({ empids }),
     })
 
-    if (!response.ok) {
+    if (!response.ok && response.status === 500) {
       throw new Error(`ERROR: ${response.status}`)
     }
 
     const data = await response.json()
-    return data // return the data to DeptTable.tsx
+    return data // return the data to EmpTable.tsx
   } catch (error) {
     console.error("Something went wrong: ", error)
   }

@@ -84,4 +84,17 @@ emprouter.put("/empupdate", async (req: Request, res: Response) => {
   }
 })
 
+// delete method to delete an employee
+emprouter.delete("/empdelete", async (req: Request, res: Response) => {
+  const { empids } = req.body
+
+  try {
+    await Employee.destroy({ where: { id: empids } })
+    res.status(200).json({ success: true, message: "Employee(s) deleted" })
+  } catch (error) {
+    console.error("Something went wrong: ", error)
+    res.status(500).json({ success: false, message: "Server error" })
+  }
+})
+
 export default emprouter

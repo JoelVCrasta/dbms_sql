@@ -2,7 +2,6 @@ import { Router, Request, Response } from "express"
 
 import Dept from "../Models/Dept"
 
-
 const oprouter = Router()
 
 oprouter.get("/dept", async (req: Request, res: Response) => {
@@ -63,7 +62,7 @@ oprouter.delete("/deptdelete", async (req: Request, res: Response) => {
   try {
     await Dept.destroy({ where: { id: deptIds } })
 
-    res.status(200).json({ success: true, message: "Departments deleted" })
+    res.status(200).json({ success: true, message: "Department(s) deleted" })
   } catch (error) {
     console.error("Something went wrong: ", error)
     res.status(500).json({ success: false, message: "Server error" })

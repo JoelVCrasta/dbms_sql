@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
+
 import AddDept from "./DeptButtons/AddDept"
 import UpdateDept from "./DeptButtons/UpdateDept"
 import DeleteDept from "./DeptButtons/DeleteDept"
+import "../Styles/scrollbar.css"
 
 // interface for the department details
 interface DeptTableProps {
@@ -77,7 +79,7 @@ const DeptTable = () => {
             <td className="text-center">No Records found</td>
           </tr>
         ) : (
-          <section className="border-2 rounded-lg h-full scroll-y-auto">
+          <section className="border-2 rounded-lg h-full overflow-y-scroll scroll-y-auto hide-scroll">
             <table className="w-full text-white">
               <thead>
                 <tr>

@@ -3,7 +3,7 @@ import EmpTable from "../Components/EmpTable"
 const Employee = () => {
   return (
     <section className="h-screen flex justify-center items-center">
-      <section className="h-2/4 w-2/5">
+      <section className="h-[500px] w-[800px]">
         <EmpTable />
       </section>
     </section>

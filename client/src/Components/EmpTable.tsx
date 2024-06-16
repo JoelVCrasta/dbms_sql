@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import AddEmp from "./EmpButtons/AddEmp"
 import UpdateEmp from "./EmpButtons/UpdateEmp"
 import DeleteEmp from "./EmpButtons/DeleteEmp"
+import "../Styles/scrollbar.css"
 
 interface empProps {
   id: number
@@ -75,7 +76,7 @@ const EmpTable = () => {
         {showUpdateEmp && <UpdateEmp onUpdateSuccess={getEmpDetails} />}
       </div>
 
-      <section className="p-2 h-full ">
+      <section className="p-2 h-full">
         {
           // if no employee details are available
           empData.length === 0 ? (
@@ -83,8 +84,8 @@ const EmpTable = () => {
               No Employee details available
             </div>
           ) : (
-            <section className="border-2 rounded-lg h-full scroll-y-auto">
-              <table className="w-full text-white">
+            <section className="border-2 rounded-lg h-full overflow-y-scroll scroll-y-auto hide-scroll">
+              <table className="w-full text-white ">
                 <thead>
                   <tr>
                     <th className="p-2">Emp ID</th>
@@ -94,7 +95,7 @@ const EmpTable = () => {
                   </tr>
                 </thead>
 
-                <tbody>
+                <tbody className="overflow-y-auto">
                   {empData.map((emp: empProps, index) => {
                     const isSelected = selectedEmp?.includes(emp.id)
 

@@ -38,7 +38,7 @@ const DeptTable = () => {
 
   // function to delete a department
   async function deleteDepartment() {
-    if (!selectedDept) {
+    if (selectedDept == null || []) {
       alert("Please select a department to delete")
       return
     }
@@ -72,22 +72,22 @@ const DeptTable = () => {
         {showUpdateDept && <UpdateDept onUpdateSuccess={getDeptDetails} />}
       </div>
       <section className="p-2 h-full ">
-        <section className="border-2 rounded-lg h-full scroll-y-auto">
-          <table className="w-full text-white">
-            <thead>
-              <tr>
-                <th className="text-xl py-2">Dept ID</th>
-                <th>Dept Name</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {deptData.length === 0 ? ( // check if the department data is empty
+        {deptData.length === 0 ? ( // check if the department data is empty
+          <tr>
+            <td className="text-center">No Records found</td>
+          </tr>
+        ) : (
+          <section className="border-2 rounded-lg h-full scroll-y-auto">
+            <table className="w-full text-white">
+              <thead>
                 <tr>
-                  <td className="text-center">No Records found</td>
+                  <th className="text-xl py-2">Dept ID</th>
+                  <th>Dept Name</th>
                 </tr>
-              ) : (
-                deptData.map(
+              </thead>
+
+              <tbody>
+                {deptData.map(
                   (dept: { id: number; dept_name: string }, index: number) => {
                     const isSelected = selectedDept?.includes(dept.id)
 
@@ -104,11 +104,11 @@ const DeptTable = () => {
                       </tr>
                     )
                   }
-                )
-              )}
-            </tbody>
-          </table>
-        </section>
+                )}
+              </tbody>
+            </table>
+          </section>
+        )}
 
         <div className="flex justify-between">
           <button

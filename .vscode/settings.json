@@ -1,0 +1,9 @@
+{
+  "editor.fontFamily": "'JetBrainsMono Nerd Font Mono',Consolas, 'Courier New', monospace",
+  "editor.fontSize": 13,
+  "editor.inlayHints.fontFamily": "",
+  "workbench.tree.indent": 12,
+  "workbench.tree.renderIndentGuides": "onHover",
+  "editor.tabSize": 4,
+  "editor.guides.indentation": true
+}

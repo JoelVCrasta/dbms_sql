@@ -41,7 +41,7 @@ const EmpTable = () => {
 
   // function to delete an employee
   async function deleteEmployee() {
-    if (!selectedEmp) {
+    if (selectedEmp == null || []) {
       alert("Please select an employee to delete")
       return
     }
@@ -119,7 +119,7 @@ const EmpTable = () => {
           )
         }
 
-        <div>
+        <div className="flex justify-evenly">
           <button
             onClick={() => {
               if (showUpdateEmp) setShowUpdateEmp(false)

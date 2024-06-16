@@ -2,16 +2,16 @@ import { Router, Request, Response } from "express"
 import Employee from "../Models/Employee"
 import Dept from "../Models/Dept"
 
-const emprouter = Router()
+const emprouter = Router() // Initialize express router
 
 // function to check if the department ID exists
 async function checkDeptIDExists(id: number) {
   return await Dept.findOne({ where: { id } })
 }
 
-// get method to send the employee details
+// Route to send the employee details
 emprouter.get("/emp", async (req: Request, res: Response) => {
-  const empDetails = await Employee.findAll()
+  const empDetails = await Employee.findAll() // fetch all employee details
 
   try {
     res.status(200).json({ success: true, empDetails })
@@ -21,7 +21,7 @@ emprouter.get("/emp", async (req: Request, res: Response) => {
   }
 })
 
-// post method to add an employee
+// Route to add an employee
 emprouter.post("/empadd", async (req: Request, res: Response) => {
   const { empId, empName, empSalary, empDept } = req.body
 
@@ -30,14 +30,14 @@ emprouter.post("/empadd", async (req: Request, res: Response) => {
   if (existingId) {
     return res
       .status(409)
-      .json({ success: false, message: "Employee ID already exists" }) // return if the employee ID exists
+      .json({ success: false, message: "Employee ID already exists" })
   }
 
   const deptExists = await checkDeptIDExists(empDept) // check if the department ID exists
   if (!deptExists) {
     return res
       .status(404)
-      .json({ success: false, message: "Department ID does not exist" }) // return if the department ID does not exist
+      .json({ success: false, message: "Department ID does not exist" })
   }
 
   try {
@@ -46,7 +46,7 @@ emprouter.post("/empadd", async (req: Request, res: Response) => {
       name: empName,
       salary: empSalary,
       dept: empDept,
-    })
+    }) // create a new employee
     res.status(201).json({ success: true, message: "Employee added" })
   } catch (error) {
     console.error("Something went wrong: ", error)
@@ -54,7 +54,7 @@ emprouter.post("/empadd", async (req: Request, res: Response) => {
   }
 })
 
-// put method to update an employee
+// Route to update an employee
 emprouter.put("/empupdate", async (req: Request, res: Response) => {
   const { empId, empName, empSalary, empDept } = req.body
 
@@ -62,20 +62,20 @@ emprouter.put("/empupdate", async (req: Request, res: Response) => {
   if (!existingId) {
     return res
       .status(404)
-      .json({ success: false, message: "Employee ID does not exist" }) // return if the employee ID does not exist
+      .json({ success: false, message: "Employee ID does not exist" })
   }
 
   const deptExists = await checkDeptIDExists(empDept) // check if the department ID exists
   if (!deptExists) {
     return res
       .status(404)
-      .json({ success: false, message: "Department ID does not exist" }) // return if the department ID does not exist
+      .json({ success: false, message: "Department ID does not exist" })
   }
 
   try {
     await Employee.update(
       { name: empName, salary: empSalary, dept: empDept },
-      { where: { id: empId } }
+      { where: { id: empId } } // update the employee details
     )
     res.status(200).json({ success: true, message: "Employee updated" })
   } catch (error) {
@@ -84,12 +84,12 @@ emprouter.put("/empupdate", async (req: Request, res: Response) => {
   }
 })
 
-// delete method to delete an employee
+// Route for deleting employee
 emprouter.delete("/empdelete", async (req: Request, res: Response) => {
   const { empids } = req.body
 
   try {
-    await Employee.destroy({ where: { id: empids } })
+    await Employee.destroy({ where: { id: empids } }) // delete employee(s)
     res.status(200).json({ success: true, message: "Employee(s) deleted" })
   } catch (error) {
     console.error("Something went wrong: ", error)

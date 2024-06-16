@@ -6,6 +6,7 @@ import Dept from "./Pages/Dept"
 import Employee from "./Pages/Employee"
 
 const App = () => {
+  // BrowserRouter to handle routing
   return (
     <Router>
       <Routes>

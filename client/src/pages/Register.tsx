@@ -17,6 +17,7 @@ const Register = () => {
   })
   const [resMessage, setResMessage] = useState("")
 
+  // Register user function
   const registerUser = async () => {
     try {
       const response = await fetch("http://localhost:3000/api/register", {
@@ -28,21 +29,24 @@ const Register = () => {
       })
 
       if (!response.ok && response.status === 500) {
+        // check for server error
         throw new Error(`${response.status}`)
       }
 
       const data = await response.json()
 
       if (!data.success && response.status === 409) {
+        // check for conflict
         setResMessage(data.message)
       } else {
-        setResMessage(data.message)
+        setResMessage(data.message) // set response message if successful
       }
     } catch (error) {
       console.error("Something went wrong : ", error)
     }
   }
 
+  // Handle register form submission
   const handleRegister = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
@@ -98,6 +102,7 @@ const Register = () => {
           </button>
         </form>
 
+        {/* Buttom to go home */}
         <div className="mt-2 flex justify-center">
           <button
             type="submit"

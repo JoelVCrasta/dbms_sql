@@ -5,7 +5,7 @@ import { userLogin, userRegister } from "../Controllers/AuthController"
 import { sendEmail } from "../Utils/emailVerify"
 import { cookie } from "../Utils/cookie"
 
-const router = express.Router()
+const router = express.Router() // Initialize express router
 
 interface LoginRequest {
   email: string
@@ -18,16 +18,17 @@ interface RegisterRequest {
   password: string
 }
 
+// Route for user login
 router.post(
   "/login",
   async (req: Request<{}, {}, LoginRequest>, res: Response) => {
     const { email, password } = req.body
 
     try {
-      const user = await userLogin(email, password)
+      const user = await userLogin(email, password) // Call userLogin controller
 
       if (user) {
-        cookie(res)
+        cookie(res) // Set cookie
 
         res.status(200).json({ success: true, message: "Login successful" })
       } else {
@@ -42,16 +43,17 @@ router.post(
   }
 )
 
+// Route for user registration
 router.post(
   "/register",
   async (req: Request<{}, {}, RegisterRequest>, res: Response) => {
     const { username, email, password } = req.body
 
-    const user = await userRegister(username, email, password)
+    const user = await userRegister(username, email, password) // Call userRegister controller
 
     try {
       if (user === 0) {
-        await sendEmail(email)
+        await sendEmail(email) // Send verification email
 
         res
           .status(201)

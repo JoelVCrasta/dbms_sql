@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer"
 
+// Function to send email to the user for account verification
 export const sendEmail = async (email: string) => {
   var transporter = nodemailer.createTransport({
     service: "gmail",
@@ -9,6 +10,7 @@ export const sendEmail = async (email: string) => {
     },
   })
 
+  // Email contents
   var mailOptions = {
     from: "loejstarc@gmail.com",
     to: email,
@@ -17,6 +19,7 @@ export const sendEmail = async (email: string) => {
     html: `<a href="http://localhost:3000/verify?email=${email}">Click here to verify</a>`,
   }
 
+  // Send email
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
       console.log(error)

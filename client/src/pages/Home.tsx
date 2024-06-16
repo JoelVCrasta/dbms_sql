@@ -5,18 +5,20 @@ import Cookies from "js-cookie"
 const Home = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
+  // Check if cookie for login status exists
   useEffect(() => {
     const checkLoginStatus = () => {
       const isLogged = Cookies.get("isLogged")
 
       if (isLogged === "true") {
-        setIsLoggedIn(true)
+        setIsLoggedIn(true) // set login status to true
       }
     }
 
     checkLoginStatus()
   }, [])
 
+  // Handle logout function
   const handleLogout = () => {
     Cookies.remove("isLogged")
     setIsLoggedIn(false)
@@ -27,7 +29,7 @@ const Home = () => {
       <h1 className="mb-4 text-4xl text-white font-bold">Company DBMS</h1>
 
       <section className="flex text-2xl font-semibold gap-5">
-        {isLoggedIn ? (
+        {isLoggedIn ? ( // check if user is logged in
           <button
             onClick={handleLogout}
             className="bg-white h-12 w-52 rounded-lg"
@@ -42,6 +44,7 @@ const Home = () => {
             >
               <button>Login</button>
             </Link>
+
             <Link
               to="/register"
               className="flex justify-center bg-white h-12 w-32 rounded-lg"
@@ -52,7 +55,7 @@ const Home = () => {
         )}
       </section>
 
-      {isLoggedIn && (
+      {isLoggedIn && ( // show navigation buttons if user is logged in
         <div className="w-[400px] h-[80px] flex justify-around items-center font-xl">
           <Link
             to="/dept"

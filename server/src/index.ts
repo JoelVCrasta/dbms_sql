@@ -1,5 +1,4 @@
 import express from "express"
-import session from "express-session"
 import cors from "cors"
 import dotenv from "dotenv"
 import cookieParser from "cookie-parser"
@@ -11,10 +10,11 @@ import emprouter from "./Routes/EmpRoutes"
 import Users from "./Models/User"
 import { cookie } from "./Utils/cookie"
 
-const app = express()
-dotenv.config()
-app.use(express.json())
-app.use(cookieParser())
+const app = express() // Initialize express
+dotenv.config() // Initialize dotenv
+app.use(express.json()) // Parse JSON bodies
+app.use(cookieParser()) // Parse cookies
+
 app.use(
   cors({
     origin: "http://localhost:5173",
@@ -28,6 +28,7 @@ sequelize
   .then(() => console.log("Connection has been established successfully."))
   .catch((error) => console.error("Unable to connect to the database:", error))
 
+// Routes
 app.use("/api", router)
 app.use("/api", oprouter)
 app.use("/api", emprouter)
@@ -36,12 +37,12 @@ app.use("/api", emprouter)
 app.get("/verify", async (req, res) => {
   const { email } = req.query
 
-  const user = await Users.findOne({ where: { email } })
+  const user = await Users.findOne({ where: { email } }) // check if user exists
 
   if (user) {
-    await Users.update({ confirmed: true }, { where: { email } })
+    await Users.update({ confirmed: true }, { where: { email } }) // update user's confirmed status
     cookie(res)
-    res.redirect("http://localhost:5173/")
+    res.redirect("http://localhost:5173/") // redirect to home page
   }
 })
 

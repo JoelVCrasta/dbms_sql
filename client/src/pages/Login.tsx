@@ -83,6 +83,7 @@ const Login = () => {
           </button>
         </form>
 
+        {/* Buttom to go home */}
         <div className="mt-2 flex justify-center">
           <button
             type="submit"

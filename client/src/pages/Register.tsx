@@ -7,7 +7,7 @@ interface RegisterDetails {
   password: string
 }
 
-const Register: React.FC = () => {
+const Register = () => {
   const navigate = useNavigate()
 
   const [registerDetails, setRegisterDetails] = useState<RegisterDetails>({
@@ -52,9 +52,11 @@ const Register: React.FC = () => {
   return (
     <section className="w-full h-screen flex flex-col justify-center items-center">
       <h1 className="mb-4 text-3xl text-white font-bold">Register</h1>
+
       <section className="p-4 w-72 border-2 border-white rounded-xl">
         <form onSubmit={handleRegister} className="flex flex-col gap-y-4">
-          <p className="text-red-500">{resMessage}</p>
+          <p className="text-red-600">{resMessage}</p>
+
           <input
             type="text"
             placeholder="Username"
@@ -95,6 +97,7 @@ const Register: React.FC = () => {
             Register
           </button>
         </form>
+
         <div className="mt-2 flex justify-center">
           <button
             type="submit"

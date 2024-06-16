@@ -23,39 +23,52 @@ const Home = () => {
   }
 
   return (
-    <section className="w-full h-screen flex flex-col justify-center items-center">
-      <h1 className="mb-4 text-4xl text-white font-bold">DBMS</h1>
+    <section className="w-full h-screen flex flex-col justify-center items-center gap-y-4 ">
+      <h1 className="mb-4 text-4xl text-white font-bold">Company DBMS</h1>
 
-      <section className="flex  text-2xl font-semibold gap-5">
+      <section className="flex text-2xl font-semibold gap-5">
         {isLoggedIn ? (
           <button
             onClick={handleLogout}
-            className="bg-white h-12 w-32 rounded-full"
+            className="bg-white h-12 w-52 rounded-lg"
           >
             Logout
           </button>
         ) : (
-          <Link
-            to="/login"
-            className="flex justify-center bg-white h-12 w-32 rounded-full"
-          >
-            <button>Login</button>
-          </Link>
+          <>
+            <Link
+              to="/login"
+              className="flex justify-center bg-white h-12 w-32 rounded-lg"
+            >
+              <button>Login</button>
+            </Link>
+            <Link
+              to="/register"
+              className="flex justify-center bg-white h-12 w-32 rounded-lg"
+            >
+              <button>Register</button>
+            </Link>
+          </>
         )}
-
-        <Link
-          to="/register"
-          className="flex justify-center bg-white h-12 w-32 rounded-full"
-        >
-          <button>Register</button>
-        </Link>
       </section>
 
-      {/* {isLoggedIn && (
-        <Link to="/chat" className="text-white text-3xl bg-black py-1 px-4">
-          Go to Chat
-        </Link>
-      )} */}
+      {isLoggedIn && (
+        <div className="w-[400px] h-[80px] flex justify-around items-center font-xl">
+          <Link
+            to="/dept"
+            className="flex justify-center rounded-lg w-[180px] h-[50px] text-2xl font-semibold text-black bg-white hover:bg-[#2f2d2e] hover:text-white hover:border-2 transition-all duration-100 ease-in-out"
+          >
+            <button>Departments</button>
+          </Link>
+
+          <Link
+            to="/employee"
+            className="flex justify-center items-center rounded-lg w-[180px] h-[50px] text-2xl font-semibold text-black bg-white hover:bg-[#2f2d2e] hover:text-white hover:border-2 transition-all duration-100 ease-in-out"
+          >
+            Employees
+          </Link>
+        </div>
+      )}
     </section>
   )
 }

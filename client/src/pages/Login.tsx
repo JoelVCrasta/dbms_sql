@@ -6,7 +6,7 @@ interface LoginDetails {
   password: string
 }
 
-const Login: React.FC = () => {
+const Login = () => {
   const navigate = useNavigate()
 
   const [loginDetails, setLoginDetails] = useState<LoginDetails>({
@@ -15,6 +15,7 @@ const Login: React.FC = () => {
   })
   const [resMessage, setResMessage] = useState("")
 
+  // Login user and get cookies for session management
   const loginUser = async () => {
     try {
       const response = await fetch("http://localhost:3000/api/login", {
@@ -42,6 +43,7 @@ const Login: React.FC = () => {
     }
   }
 
+  // Handle login form submission
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
@@ -51,9 +53,11 @@ const Login: React.FC = () => {
   return (
     <section className="w-full h-screen flex flex-col justify-center items-center">
       <h1 className="mb-4 text-3xl text-white font-bold">Login</h1>
+
       <section className=" w-72 p-4 border-2 border-white rounded-xl ">
         <form onSubmit={handleLogin} className="flex flex-col gap-y-4">
-          <p className="">{resMessage}</p>
+          <p className="text-red-600">{resMessage}</p>
+
           <input
             type="email"
             placeholder="Email"
@@ -78,11 +82,12 @@ const Login: React.FC = () => {
             Login
           </button>
         </form>
+
         <div className="mt-2 flex justify-center">
           <button
             type="submit"
             onClick={() => navigate("/")}
-            className=" text-white hover:text-gray-300"
+            className="text-white hover:text-gray-300"
           >
             Go to Home
           </button>

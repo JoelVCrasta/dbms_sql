@@ -40,7 +40,7 @@ const DeptTable = () => {
 
   // function to delete a department
   async function deleteDepartment() {
-    if (selectedDept == null || []) {
+    if (selectedDept == null || selectedDept.length === 0) {
       alert("Please select a department to delete")
       return
     }

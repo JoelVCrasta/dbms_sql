@@ -42,7 +42,7 @@ const EmpTable = () => {
 
   // function to delete an employee
   async function deleteEmployee() {
-    if (selectedEmp == null || []) {
+    if (selectedEmp == null || selectedEmp.length === 0) {
       alert("Please select an employee to delete")
       return
     }
